@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/navigation_home">
+
+    <fragment
+        android:id="@+id/navigation_home"
+        android:name="pl.kwiatekmichal.pokedex.ui.home.HomeFragment"
+        android:label="@string/title_home"
+        tools:layout="@layout/fragment_home" />
+
+    <fragment
+        android:id="@+id/navigation_pokemons"
+        android:name="pl.kwiatekmichal.pokedex.features.pokemons.presentation.list.PokemonListFragment"
+        android:label="@string/bottom_menu_pokemons"
+        tools:layout="@layout/fragment_pokemon_list">
+
+        <action
+            android:id="@+id/action_navigate_from_screen_pokemons_to_screen_pokemon_details"
+            app:destination="@+id/navigation_pokemon"
+            app:popUpTo="@id/navigation_pokemons" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/navigation_dashboard"
+        android:name="pl.kwiatekmichal.pokedex.ui.dashboard.DashboardFragment"
+        android:label="@string/title_dashboard"
+        tools:layout="@layout/fragment_dashboard" />
+
+    <fragment
+        android:id="@+id/navigation_notifications"
+        android:name="pl.kwiatekmichal.pokedex.ui.notifications.NotificationsFragment"
+        android:label="@string/title_notifications"
+        tools:layout="@layout/fragment_notifications" />
+
+    <fragment
+        android:id="@id/navigation_pokemon"
+        android:name="pl.kwiatekmichal.pokedex.features.pokemons.presentation.details.PokemonFragment"
+        android:label="@string/labels_pokemon_title"
+        tools:layout="@layout/fragment_pokemon" />
+</navigation>

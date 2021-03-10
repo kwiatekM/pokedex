@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">Pokedex</string>
+
+    <string name="bottom_menu_pokemons">Pokemons</string>
+    <string name="labels_message_favourite_pokemon">%s started to interest you.</string>
+    <string name="labels_message_dislike_pokemon">%s is no longer interested in you.</string>
+    <string name="labels_message_caught_pokemon">%s fell into your Pokeball.</string>
+    <string name="labels_message_not_caught_pokemon">%s fell from your Pokeball.</string>
+    <string name="labels_pokemon_title">Pokemon</string>
+    <string name="labels_pokemon_height">Height</string>
+    <string name="labels_pokemon_weight">Weight</string>
+
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
+</resources>
