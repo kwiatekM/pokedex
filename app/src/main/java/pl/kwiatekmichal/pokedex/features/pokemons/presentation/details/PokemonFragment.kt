@@ -1,10 +1,8 @@
 package pl.kwiatekmichal.pokedex.features.pokemons.presentation.details
 
 import android.os.Bundle
-import org.koin.androidx.scope.fragmentScope
-import org.koin.androidx.viewmodel.ViewModelOwner
-import org.koin.androidx.viewmodel.scope.viewModel
-import org.koin.core.scope.Scope
+import androidx.fragment.app.viewModels
+import dagger.hilt.android.AndroidEntryPoint
 import pl.kwiatekmichal.pokedex.R
 import pl.kwiatekmichal.pokedex.core.base.BaseFragment
 import pl.kwiatekmichal.pokedex.core.extension.viewBinding
@@ -16,6 +14,7 @@ import pl.kwiatekmichal.pokedex.features.pokemons.presentation.model.PokemonDeta
 import pl.kwiatekmichal.pokedex.features.pokemons.presentation.model.PokemonDetailsHeaderImagesDisplayable
 import pl.kwiatekmichal.pokedex.features.pokemons.presentation.model.PokemonDisplayable
 
+@AndroidEntryPoint
 class PokemonFragment : BaseFragment<PokemonViewModel>(
     layoutId = R.layout.fragment_pokemon
 ), OnPokemonClickListener {
@@ -23,9 +22,8 @@ class PokemonFragment : BaseFragment<PokemonViewModel>(
         const val POKEMON_ID_KEY = "pokemonIdKey"
     }
 
-    override val scope: Scope by lazy { fragmentScope() }
     override val TAG: String = "PokemonFragment"
-    override val viewModel: PokemonViewModel by scope.viewModel(owner = { ViewModelOwner.from(this) })
+    override val viewModel: PokemonViewModel by viewModels()
     private val binding by viewBinding(FragmentPokemonBinding::bind)
     private val detailsAdapter: PokemonAdapter by scope.inject()
 

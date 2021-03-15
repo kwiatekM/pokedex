@@ -5,12 +5,12 @@ import android.view.View
 import android.widget.Toast
 import androidx.annotation.LayoutRes
 import androidx.annotation.StringRes
-import org.koin.androidx.scope.ScopeFragment
+import androidx.fragment.app.Fragment
 import pl.kwiatekmichal.pokedex.core.util.Logger
 
 abstract class BaseFragment<T : BaseViewModel>(
     @LayoutRes layoutId: Int
-) : ScopeFragment(
+) : Fragment(
     layoutId
 ) {
     abstract val TAG: String

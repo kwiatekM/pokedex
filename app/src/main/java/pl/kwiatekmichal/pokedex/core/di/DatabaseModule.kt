@@ -1,17 +1,33 @@
 package pl.kwiatekmichal.pokedex.core.di
 
+import android.content.Context
 import androidx.room.Room
-import org.koin.android.ext.koin.androidContext
-import org.koin.dsl.module
+import dagger.Module
+import dagger.Provides
+import dagger.hilt.InstallIn
+import dagger.hilt.android.qualifiers.ApplicationContext
+import dagger.hilt.components.SingletonComponent
 import pl.kwiatekmichal.pokedex.core.database.PokeDatabase
+import pl.kwiatekmichal.pokedex.features.pokemons.data.PokemonDao
 
-val databseModule = module {
-    single {
-        Room.databaseBuilder(
-            androidContext(),
+@Module
+@InstallIn(SingletonComponent::class)
+object DatabaseModule {
+    @Provides
+    fun providePokeDatabase(
+        @ApplicationContext context: Context
+    ): PokeDatabase {
+        return Room.databaseBuilder(
+            context,
             PokeDatabase::class.java,
             "eventsDatabase"
         ).build()
     }
-    single { get<PokeDatabase>().getPokemonDao() }
+
+    @Provides
+    fun providePokemonDao(
+        pokeDatabase: PokeDatabase
+    ): PokemonDao {
+        return pokeDatabase.getPokemonDao()
+    }
 }

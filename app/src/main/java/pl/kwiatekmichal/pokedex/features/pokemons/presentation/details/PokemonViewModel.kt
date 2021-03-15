@@ -5,6 +5,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.map
 import androidx.lifecycle.viewModelScope
+import dagger.hilt.android.lifecycle.HiltViewModel
 import pl.kwiatekmichal.pokedex.core.base.BaseViewModel
 import pl.kwiatekmichal.pokedex.core.exception.ErrorMapper
 import pl.kwiatekmichal.pokedex.features.pokemons.domain.GetPokemonUseCase
@@ -13,6 +14,7 @@ import pl.kwiatekmichal.pokedex.features.pokemons.domain.SaveFavouritePokemonUse
 import pl.kwiatekmichal.pokedex.features.pokemons.domain.model.Pokemon
 import pl.kwiatekmichal.pokedex.features.pokemons.presentation.model.PokemonDisplayable
 
+@HiltViewModel
 class PokemonViewModel(
     private val getPokemonUseCase: GetPokemonUseCase,
     private val saveFavouritePokemonUseCase: SaveFavouritePokemonUseCase,

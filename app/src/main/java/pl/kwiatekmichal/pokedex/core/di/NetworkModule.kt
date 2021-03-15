@@ -3,14 +3,14 @@ package pl.kwiatekmichal.pokedex.core.di
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.adapters.Rfc3339DateJsonAdapter
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
-import okhttp3.Interceptor
+import dagger.Module
+import dagger.Provides
+import dagger.hilt.InstallIn
+import dagger.hilt.components.SingletonComponent
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
-import org.koin.dsl.module
 import pl.kwiatekmichal.pokedex.BuildConfig
 import pl.kwiatekmichal.pokedex.core.api.PokeApi
-import pl.kwiatekmichal.pokedex.core.network.interactor.HeaderInterceptor
-import pl.kwiatekmichal.pokedex.core.network.interactor.HeaderInterceptorImpl
 import pl.kwiatekmichal.pokedex.core.network.interactor.JsonLogger
 import pl.kwiatekmichal.pokedex.core.util.Logger
 import retrofit2.Retrofit
@@ -18,15 +18,18 @@ import retrofit2.converter.moshi.MoshiConverterFactory
 import java.util.*
 import java.util.concurrent.TimeUnit
 
-val networkModule = module {
+@Module
+@InstallIn(SingletonComponent::class)
+object NetworkModule {
 //    single<HeaderInterceptor> {
 //        HeaderInterceptorImpl().also {
 //            it.addHeader("APIKey" to "4B131E05-2D0B-458D-A0A9-29AC7211F469")
 //        }
 //    }
 
-    single<Interceptor> {
-        HttpLoggingInterceptor(object : HttpLoggingInterceptor.Logger {
+    @Provides
+    fun provideHttpLoggingInterceptor(): HttpLoggingInterceptor {
+        return HttpLoggingInterceptor(object : HttpLoggingInterceptor.Logger {
             override fun log(message: String) {
                 Logger.logJson(message)
             }
@@ -38,8 +41,9 @@ val networkModule = module {
         }
     }
 
-    single {
-        OkHttpClient.Builder()
+    @Provides
+    fun provideOkHttpClient(): OkHttpClient {
+        return OkHttpClient.Builder()
 //            .addInterceptor(get<HeaderInterceptor>())
             .readTimeout(20L, TimeUnit.SECONDS)
             .connectTimeout(20L, TimeUnit.SECONDS)
@@ -49,8 +53,11 @@ val networkModule = module {
             .build()
     }
 
-    single {
-        Retrofit.Builder()
+    @Provides
+    fun provideRetrofit(
+        client: OkHttpClient
+    ): Retrofit {
+        return Retrofit.Builder()
             .baseUrl("https://pokeapi.co/api/v2/")
             .addConverterFactory(
                 MoshiConverterFactory.create(
@@ -60,9 +67,14 @@ val networkModule = module {
                         .build()
                 )
             )
-            .client(get())
+            .client(client)
             .build()
     }
 
-    single { get<Retrofit>().create(PokeApi::class.java) }
+    @Provides
+    fun providePokeApi(
+        retrofit: Retrofit
+    ): PokeApi {
+        return retrofit.create(PokeApi::class.java)
+    }
 }

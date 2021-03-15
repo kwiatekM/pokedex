@@ -5,6 +5,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.map
 import androidx.lifecycle.viewModelScope
+import dagger.hilt.android.lifecycle.HiltViewModel
 import pl.kwiatekmichal.pokedex.R
 import pl.kwiatekmichal.pokedex.core.base.BaseViewModel
 import pl.kwiatekmichal.pokedex.core.exception.ErrorMapper
@@ -14,8 +15,10 @@ import pl.kwiatekmichal.pokedex.features.pokemons.domain.SaveFavouritePokemonUse
 import pl.kwiatekmichal.pokedex.features.pokemons.domain.model.Pokemon
 import pl.kwiatekmichal.pokedex.features.pokemons.presentation.model.PokemonDisplayable
 import pl.kwiatekmichal.pokedex.features.pokemons.presentation.navigator.PokemonNavigator
+import javax.inject.Inject
 
-class PokemonListViewModel(
+@HiltViewModel
+class PokemonListViewModel @Inject constructor(
     private val getPokemonsUseCase: GetPokemonsUseCase,
     private val saveFavouritePokemonUseCase: SaveFavouritePokemonUseCase,
     private val saveCaughtPokemonUseCase: SaveCaughtPokemonUseCase,

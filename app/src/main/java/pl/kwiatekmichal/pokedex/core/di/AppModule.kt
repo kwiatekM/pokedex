@@ -1,11 +1,14 @@
 package pl.kwiatekmichal.pokedex.core.di
 
+import android.app.Application
 import android.content.Context
 import android.net.ConnectivityManager
 import androidx.navigation.navOptions
-import org.koin.android.ext.koin.androidApplication
-import org.koin.android.ext.koin.androidContext
-import org.koin.dsl.module
+import dagger.Module
+import dagger.Provides
+import dagger.hilt.InstallIn
+import dagger.hilt.android.qualifiers.ApplicationContext
+import dagger.hilt.components.SingletonComponent
 import pl.kwiatekmichal.pokedex.R
 import pl.kwiatekmichal.pokedex.core.exception.ErrorMapper
 import pl.kwiatekmichal.pokedex.core.exception.ErrorMapperImpl
@@ -17,8 +20,16 @@ import pl.kwiatekmichal.pokedex.core.network.NetworkStateProvider
 import pl.kwiatekmichal.pokedex.core.network.NetworkStateProviderImpl
 import pl.kwiatekmichal.pokedex.core.provider.ActivityProvider
 
-val appModule = module {
-    single(createdAtStart = true) { ActivityProvider(androidApplication()) }
+@Module
+@InstallIn(SingletonComponent::class)
+object AppModule {
+    @Provides
+    fun provideActivityProvider(
+        application: Application
+    ): ActivityProvider {
+        return ActivityProvider(application)
+    }
+
     factory {
         navOptions {
             anim { enter = R.anim.fragment_fade_enter }

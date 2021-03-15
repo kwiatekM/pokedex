@@ -1,9 +1,7 @@
 package pl.kwiatekmichal.pokedex.features.pokemons.presentation.list
 
-import org.koin.androidx.scope.fragmentScope
-import org.koin.androidx.viewmodel.ViewModelOwner.Companion.from
-import org.koin.androidx.viewmodel.scope.viewModel
-import org.koin.core.scope.Scope
+import androidx.fragment.app.viewModels
+import dagger.hilt.android.AndroidEntryPoint
 import pl.kwiatekmichal.pokedex.R
 import pl.kwiatekmichal.pokedex.core.base.BaseFragment
 import pl.kwiatekmichal.pokedex.core.extension.viewBinding
@@ -13,12 +11,12 @@ import pl.kwiatekmichal.pokedex.features.pokemons.presentation.list.adapter.OnPo
 import pl.kwiatekmichal.pokedex.features.pokemons.presentation.list.adapter.PokemonsAdapter
 import pl.kwiatekmichal.pokedex.features.pokemons.presentation.model.PokemonDisplayable
 
+@AndroidEntryPoint
 class PokemonListFragment : BaseFragment<PokemonListViewModel>(
     layoutId = R.layout.fragment_pokemon_list
 ), OnPokemonSimpleListener {
-    override val scope: Scope by lazy { fragmentScope() }
     override val TAG: String = "PokemonListFragment"
-    override val viewModel: PokemonListViewModel by scope.viewModel(owner = { from(this) })
+    override val viewModel: PokemonListViewModel by viewModels()
     private val binding by viewBinding(FragmentPokemonListBinding::bind)
     private val pokemonsAdapter: PokemonsAdapter by scope.inject()
 
