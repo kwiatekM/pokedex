@@ -2,6 +2,7 @@ package pl.kwiatekmichal.pokedex.features.pokemons.presentation.details
 
 import android.os.Bundle
 import androidx.fragment.app.viewModels
+import androidx.hilt.navigation.fragment.hiltNavGraphViewModels
 import dagger.hilt.android.AndroidEntryPoint
 import pl.kwiatekmichal.pokedex.R
 import pl.kwiatekmichal.pokedex.core.base.BaseFragment
@@ -13,6 +14,7 @@ import pl.kwiatekmichal.pokedex.features.pokemons.presentation.details.adapter.P
 import pl.kwiatekmichal.pokedex.features.pokemons.presentation.model.PokemonDetailsGeneralDisplayable
 import pl.kwiatekmichal.pokedex.features.pokemons.presentation.model.PokemonDetailsHeaderImagesDisplayable
 import pl.kwiatekmichal.pokedex.features.pokemons.presentation.model.PokemonDisplayable
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class PokemonFragment : BaseFragment<PokemonViewModel>(
@@ -23,9 +25,11 @@ class PokemonFragment : BaseFragment<PokemonViewModel>(
     }
 
     override val TAG: String = "PokemonFragment"
-    override val viewModel: PokemonViewModel by viewModels()
+    override val viewModel: PokemonViewModel by viewModels()//hiltNavGraphViewModels(R.id.mobile_navigation)
     private val binding by viewBinding(FragmentPokemonBinding::bind)
-    private val detailsAdapter: PokemonAdapter by scope.inject()
+
+    @Inject
+    lateinit var detailsAdapter: PokemonAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

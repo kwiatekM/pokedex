@@ -1,6 +1,7 @@
 package pl.kwiatekmichal.pokedex.features.pokemons.presentation.list
 
 import androidx.fragment.app.viewModels
+import androidx.hilt.navigation.fragment.hiltNavGraphViewModels
 import dagger.hilt.android.AndroidEntryPoint
 import pl.kwiatekmichal.pokedex.R
 import pl.kwiatekmichal.pokedex.core.base.BaseFragment
@@ -10,15 +11,17 @@ import pl.kwiatekmichal.pokedex.databinding.FragmentPokemonListBinding
 import pl.kwiatekmichal.pokedex.features.pokemons.presentation.list.adapter.OnPokemonSimpleListener
 import pl.kwiatekmichal.pokedex.features.pokemons.presentation.list.adapter.PokemonsAdapter
 import pl.kwiatekmichal.pokedex.features.pokemons.presentation.model.PokemonDisplayable
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class PokemonListFragment : BaseFragment<PokemonListViewModel>(
     layoutId = R.layout.fragment_pokemon_list
 ), OnPokemonSimpleListener {
     override val TAG: String = "PokemonListFragment"
-    override val viewModel: PokemonListViewModel by viewModels()
+    override val viewModel: PokemonListViewModel by viewModels()//hiltNavGraphViewModels(R.id.mobile_navigation)
     private val binding by viewBinding(FragmentPokemonListBinding::bind)
-    private val pokemonsAdapter: PokemonsAdapter by scope.inject()
+    @Inject
+    lateinit var pokemonsAdapter: PokemonsAdapter
 
     override fun initViews() {
         super.initViews()

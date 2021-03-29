@@ -13,9 +13,10 @@ import pl.kwiatekmichal.pokedex.features.pokemons.domain.SaveCaughtPokemonUseCas
 import pl.kwiatekmichal.pokedex.features.pokemons.domain.SaveFavouritePokemonUseCase
 import pl.kwiatekmichal.pokedex.features.pokemons.domain.model.Pokemon
 import pl.kwiatekmichal.pokedex.features.pokemons.presentation.model.PokemonDisplayable
+import javax.inject.Inject
 
 @HiltViewModel
-class PokemonViewModel(
+class PokemonViewModel @Inject constructor(
     private val getPokemonUseCase: GetPokemonUseCase,
     private val saveFavouritePokemonUseCase: SaveFavouritePokemonUseCase,
     private val saveCaughtPokemonUseCase: SaveCaughtPokemonUseCase,

@@ -12,8 +12,9 @@ import pl.kwiatekmichal.pokedex.features.pokemons.data.model.TypeCached
 import pl.kwiatekmichal.pokedex.features.pokemons.domain.PokemonRepository
 import pl.kwiatekmichal.pokedex.features.pokemons.domain.model.Pokemon
 import pl.kwiatekmichal.pokedex.features.pokemons.domain.model.PokemonType
+import javax.inject.Inject
 
-class PokemonRepositoryImpl(
+class PokemonRepositoryImpl @Inject constructor(
     private val pokemonApi: PokeApi,
     private val pokemonDao: PokemonDao,
     private val networkStateProvider: NetworkStateProvider,

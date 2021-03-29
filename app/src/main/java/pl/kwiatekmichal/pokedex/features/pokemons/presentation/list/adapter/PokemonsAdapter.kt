@@ -12,8 +12,9 @@ import pl.kwiatekmichal.pokedex.core.extension.inflate
 import pl.kwiatekmichal.pokedex.core.extension.setOnDebouncedClickListener
 import pl.kwiatekmichal.pokedex.databinding.ItemFragmentPokemonListBinding
 import pl.kwiatekmichal.pokedex.features.pokemons.presentation.model.PokemonDisplayable
+import javax.inject.Inject
 
-class PokemonsAdapter :
+class PokemonsAdapter @Inject constructor() :
     RecyclerView.Adapter<PokemonsAdapter.PokemonSimpleListViewHolder>() {
 
     private val pokemons by lazy { mutableListOf<PokemonDisplayable>() }

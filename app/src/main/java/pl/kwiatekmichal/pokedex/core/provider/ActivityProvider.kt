@@ -3,8 +3,9 @@ package pl.kwiatekmichal.pokedex.core.provider
 import android.app.Activity
 import android.app.Application
 import android.os.Bundle
+import javax.inject.Inject
 
-class ActivityProvider(
+class ActivityProvider @Inject constructor(
     app: Application
 ) : Application.ActivityLifecycleCallbacks {
     var foregroundActivity: Activity? = null

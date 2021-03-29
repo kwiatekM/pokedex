@@ -5,8 +5,9 @@ import androidx.recyclerview.widget.RecyclerView
 import pl.kwiatekmichal.pokedex.R
 import pl.kwiatekmichal.pokedex.core.extension.inflate
 import pl.kwiatekmichal.pokedex.features.pokemons.presentation.model.PokemonDetailsDisplayable
+import javax.inject.Inject
 
-class PokemonAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class PokemonAdapter @Inject constructor() : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     companion object {
         const val HeaderImageViewType = 0
         const val HeaderMainDataViewType = 1
