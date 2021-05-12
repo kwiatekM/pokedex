@@ -1,7 +1,6 @@
 package pl.kwiatekmichal.pokedex.features.pokemons.presentation.details
 
 import android.os.Bundle
-import androidx.fragment.app.viewModels
 import androidx.hilt.navigation.fragment.hiltNavGraphViewModels
 import dagger.hilt.android.AndroidEntryPoint
 import pl.kwiatekmichal.pokedex.R
@@ -25,7 +24,7 @@ class PokemonFragment : BaseFragment<PokemonViewModel>(
     }
 
     override val TAG: String = "PokemonFragment"
-    override val viewModel: PokemonViewModel by viewModels()//hiltNavGraphViewModels(R.id.mobile_navigation)
+    override val viewModel: PokemonViewModel by hiltNavGraphViewModels(R.id.mobile_navigation)
     private val binding by viewBinding(FragmentPokemonBinding::bind)
 
     @Inject

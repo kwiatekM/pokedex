@@ -9,11 +9,13 @@ import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import pl.kwiatekmichal.pokedex.core.database.PokeDatabase
 import pl.kwiatekmichal.pokedex.features.pokemons.data.PokemonDao
+import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
 object DatabaseModule {
     @Provides
+    @Singleton
     fun providePokeDatabase(
         @ApplicationContext context: Context
     ): PokeDatabase {

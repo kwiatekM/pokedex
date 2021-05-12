@@ -1,6 +1,5 @@
 package pl.kwiatekmichal.pokedex.features.pokemons.presentation.list
 
-import androidx.fragment.app.viewModels
 import androidx.hilt.navigation.fragment.hiltNavGraphViewModels
 import dagger.hilt.android.AndroidEntryPoint
 import pl.kwiatekmichal.pokedex.R
@@ -18,8 +17,9 @@ class PokemonListFragment : BaseFragment<PokemonListViewModel>(
     layoutId = R.layout.fragment_pokemon_list
 ), OnPokemonSimpleListener {
     override val TAG: String = "PokemonListFragment"
-    override val viewModel: PokemonListViewModel by viewModels()//hiltNavGraphViewModels(R.id.mobile_navigation)
+    override val viewModel: PokemonListViewModel by hiltNavGraphViewModels(R.id.mobile_navigation)
     private val binding by viewBinding(FragmentPokemonListBinding::bind)
+
     @Inject
     lateinit var pokemonsAdapter: PokemonsAdapter
 

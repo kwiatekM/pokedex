@@ -21,19 +21,9 @@ import java.util.concurrent.TimeUnit
 @Module
 @InstallIn(SingletonComponent::class)
 object NetworkModule {
-//    single<HeaderInterceptor> {
-//        HeaderInterceptorImpl().also {
-//            it.addHeader("APIKey" to "4B131E05-2D0B-458D-A0A9-29AC7211F469")
-//        }
-//    }
-
     @Provides
     fun provideHttpLoggingInterceptor(): HttpLoggingInterceptor {
-        return HttpLoggingInterceptor(object : HttpLoggingInterceptor.Logger {
-            override fun log(message: String) {
-                Logger.logJson(message)
-            }
-        }).apply {
+        return HttpLoggingInterceptor { message -> Logger.logJson(message) }.apply {
             level = when {
                 BuildConfig.DEBUG -> HttpLoggingInterceptor.Level.BODY
                 else -> HttpLoggingInterceptor.Level.NONE
@@ -44,7 +34,6 @@ object NetworkModule {
     @Provides
     fun provideOkHttpClient(): OkHttpClient {
         return OkHttpClient.Builder()
-//            .addInterceptor(get<HeaderInterceptor>())
             .readTimeout(20L, TimeUnit.SECONDS)
             .connectTimeout(20L, TimeUnit.SECONDS)
             .addInterceptor(HttpLoggingInterceptor(JsonLogger()).also {
